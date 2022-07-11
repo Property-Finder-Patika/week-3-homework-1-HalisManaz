@@ -1,15 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	str := "PropertyFinder"
 	var strSlice []string
+	str := "PropertyFinder"
 
 	// Create a slice contains all letters of string value
-	for i := 0; i < len(str); i++ {
-		strSlice = append(strSlice, string(str[i]))
-	}
+	strSlice = strings.Split(str, "")
 
 	fmt.Println(strSlice)                          // [P r o p e r t y F i n d e r]
 	fmt.Println(RotateSlice(strSlice, 2, "left"))  // [o p e r t y F i n d e r P r]
@@ -21,15 +22,13 @@ func main() {
 func RotateSlice(strSlice []string, n int, direction string) []string {
 	// Basically, divide given slice by two part with n number index
 	// After that combine these parts each other with append function
-	var result []string
+	var s1, s2 []string
 	if direction == "left" {
-		s1 := strSlice[n:]
-		s2 := strSlice[:n]
-		result = append(s1, s2...)
+		s1 = strSlice[n:]
+		s2 = strSlice[:n]
 	} else if direction == "right" {
-		s1 := strSlice[len(strSlice)-n:]
-		s2 := strSlice[:len(strSlice)-n]
-		result = append(s1, s2...)
+		s1 = strSlice[len(strSlice)-n:]
+		s2 = strSlice[:len(strSlice)-n]
 	}
-	return result
+	return append(s1, s2...)
 }
